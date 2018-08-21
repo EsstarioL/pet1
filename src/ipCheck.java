@@ -28,49 +28,9 @@ public class ipCheck {
             System.out.println("верный формат х.х.х.х где х от 0 - 255");
 
         }
-//        finalResult(firstArr,secondArr);
-        circle(firstArr,secondArr);
+        System.out.println(circle(firstArr,secondArr));
 
     }
-
-    public static void finalResult(String[] firstIp, String[] secondIp) {
-        int[] a1 = new int[4];
-        int[] a2 = new int[4];
-        String message = "";
-        for (int i = 0; i < 4; i++) {
-            a1[i] = Integer.parseInt(firstIp[i]);
-            a2[i] = Integer.parseInt(secondIp[i]);
-        }
-        if ((a1[0] == a2[0]) && (a1[1] == a2[1]) && (a1[2] == a2[2]) && (a1[3] == a2[3])) System.out.println("В введённом диапазоне нет других ip адресов");
-        else if ((a1[0] == a2[0]) && (a1[1] == a2[1]) && (a1[2] == a2[2]) && (a1[3] != a2[3])) {
-            for (int i = a1[3]+1; i < a2[3]; i++) {
-                System.out.println(a1[0]+"."+a1[1]+"."+a1[2]+"."+i);
-            }
-        }
-
-//        for (int i = a1[0]; i <= a2[0]; i++) {
-//            if (i < a2[0]) message+=i+".";
-//            else {message+=a1[0]+".";
-//                i+=2;}
-//            for (int j = a1[1]; j <= a2[1]; j++) {
-//                if (j < a2[1] ) message+=j+".";
-//                else {message+=a1[1]+"."; j+=2;}
-//                for (int k = a1[2]; k <= a2[2]; k++) {
-//                    if (k < a2[2] ) message+=k+".";
-//                    else {message+=a1[2]+"."; k+=2;};
-//                    for (int l = a1[3]; l <= a2[3]; l++) {
-//                        if (l < a2[3] ) System.out.println(message+l);
-//                        else {message+=a1[3]; l+=2;}
-//
-//                    }
-//
-//                }
-//            }
-//
-//
-//                }
-
-            }
 
 
 
@@ -88,37 +48,43 @@ public class ipCheck {
         return result;
 
     }
-    public static void circle (String[] firstIp, String[] secondIp){
+    public static String circle (String[] firstIp, String[] secondIp) {
         int[] a1 = new int[4];
         int[] a2 = new int[4];
-        int max = 255;
-        int min = 0;
-        String message = "";
+
         for (int i = 0; i < 4; i++) {
             a1[i] = Integer.parseInt(firstIp[i]);
             a2[i] = Integer.parseInt(secondIp[i]);
         }
-        for (int i = a1[0]; i <= a2[0]; i++) {
-            for (int j = a1[1]; j <= a2[1]; j++) {
-                for (int k = a1[2]; k <= a2[2]; k++) {
-                    if (k == a1[2]) {
-                        min = a1[3]+1;
-                    }
-                    if (k == a2[2]) {
-                        max = a2[3]-1;
-                    }
-                    for (int l = min; l <= max; l++) {
+        int max = 255;
+        int max2 = 255;
+        int max3 = 255;
+        int min = a1[3]+1;
+        int count = 0;
+        String result = "";
+        if (a1[0] > a2[0]) {result = "1 укажите ip адреса в ином порядке";}
+        else {
+            result = "Операция выполнена успешно!";
+            for (int i = a1[0]; i <= a2[0]; i++) {
+                if (a1[0] == a2[0]) count = 1;
+                if (count == 1) max = a2[1];
+                for (int j = a1[1]; j <= max; j++) {
+                    if ((j == a2[1] && count == 1)) count = 2;
+                    if (count == 2) max2 = a2[2];
+                    for (int k = a1[2]; k <= max2; k++) {
+                        if ((k == a2[2] && count == 2)) count = 3;
+                        if (count == 3) max3 = a2[3] - 1;
+                        for (int l = min; l <= max3; l++) {
+                            System.out.println(i + "." + j + "." + k + "." + l);
+                        }
+                        min = 0;
 
-
-
-                        System.out.println(i+"."+j+"."+k+"."+l);
                     }
-                    min=0;
                 }
             }
         }
-    }
 
 
-
+return result;
+}
 }
