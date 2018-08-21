@@ -28,11 +28,9 @@ public class IpCheck {
             System.out.println("верный формат х.х.х.х где х от 0 - 255");
 
         }
-        System.out.println(circle(firstArr,secondArr));
+        System.out.println(circle(firstArr, secondArr));
 
     }
-
-
 
 
     public static boolean checkIp(String[] ip) {
@@ -48,43 +46,62 @@ public class IpCheck {
         return result;
 
     }
-    public static String circle (String[] firstIp, String[] secondIp) {
+
+    public static String circle(String[] firstIp, String[] secondIp) {
+        String result = "";
         int[] a1 = new int[4];
         int[] a2 = new int[4];
+        for (int i = 0; i < 4; i++) {
+            a1[i] = Integer.parseInt(firstIp[i]);
+            a2[i] = Integer.parseInt(secondIp[i]);
+        }
+
+
+        int max = 255;
+        int max2 = 255;
+        int max3 = 255;
+        int min = a1[1];
+        int min2 = a1[2];
+        int min3 = a1[3] + 1;
+        int count = 0;
 
         for (int i = 0; i < 4; i++) {
             a1[i] = Integer.parseInt(firstIp[i]);
             a2[i] = Integer.parseInt(secondIp[i]);
         }
-        int max = 255;
-        int max2 = 255;
-        int max3 = 255;
-        int min = a1[3]+1;
-        int count = 0;
-        String result = "";
-        if (a1[0] > a2[0]) {result = "1 укажите ip адреса в ином порядке";}
+
+
+        if ((a1[0] > a2[0])) result = "укажите ip адреса в ином порядке";
+        else if ((a1[0] == a2[0]) && (a1[1] > a2[1])) result = "укажите ip адреса в ином порядке";
+        else if (((a1[0] == a2[0]) && (a1[1] == a2[1])) && (a1[2] > a2[2])) result = "укажите ip адреса в ином порядке";
+        else if (((a1[0] == a2[0]) && (a1[1] == a2[1])) && (a1[2] == a2[2]) && (a1[3]>a2[3])) result = "укажите ip адреса в ином порядке";
         else {
-            result = "Операция выполнена успешно!";
+
             for (int i = a1[0]; i <= a2[0]; i++) {
-                if (a1[0] == a2[0]) count = 1;
+
+                if (i == a2[0]) count = 1;
                 if (count == 1) max = a2[1];
-                for (int j = a1[1]; j <= max; j++) {
+                for (int j = min; j <= max; j++) {
                     if ((j == a2[1] && count == 1)) count = 2;
                     if (count == 2) max2 = a2[2];
-                    for (int k = a1[2]; k <= max2; k++) {
+                    for (int k = min2; k <= max2; k++) {
                         if ((k == a2[2] && count == 2)) count = 3;
                         if (count == 3) max3 = a2[3] - 1;
-                        for (int l = min; l <= max3; l++) {
+                        for (int l = min3; l <= max3; l++) {
                             System.out.println(i + "." + j + "." + k + "." + l);
                         }
-                        min = 0;
+                        min3 = 0;
 
                     }
+                    min2 = 0;
                 }
+                min = 0;
+
             }
+            result = "Операция выполнена успешно";
+
+
         }
-
-
-return result;
-}
+        return result;
+    }
 }
