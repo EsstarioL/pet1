@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ipCheck {
+public class IpCheck {
     public static void main(String[] args) {
         String symbol = "\\.";
         Scanner sc = new Scanner(System.in);
