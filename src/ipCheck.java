@@ -11,6 +11,7 @@ public class IpCheck {
         boolean result = false;
 
         while (result == false) {
+            System.out.println("Введите первый ip адрес");
             firstIp = sc.next();
             firstArr = firstIp.split(symbol);
             if (result = checkIp(firstArr)) break;
@@ -21,6 +22,7 @@ public class IpCheck {
         result = false;
 
         while (result == false) {
+            System.out.println("Введите второй ip адрес");
             secondIp = sc.next();
             secondArr = secondIp.split(symbol);
             if (result = checkIp(secondArr)) break;
@@ -29,7 +31,7 @@ public class IpCheck {
 
         }
         System.out.println(circle(firstArr, secondArr));
-
+        sc.next();
     }
 
 
@@ -104,4 +106,6 @@ public class IpCheck {
         }
         return result;
     }
+
+
 }
